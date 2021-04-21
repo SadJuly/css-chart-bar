@@ -4,13 +4,17 @@ class HorizontalChart {
         height,
         width,
         title,
-        data
+        data,
+        color,
+        dataLabel
     }) {
         this.element = element
+        this.color = color
         this.height = height
         this.width = width
         this.title = title
         this.data = data
+        this.dataLabel = dataLabel
     }
 
     render() {
@@ -48,12 +52,20 @@ class HorizontalChart {
             let barElement = document.createElement('div')
             barElement.className = 'chart-bar'
             barElement.style.width = value + '%'
+            if(this.color){
+                barElement.style.background = this.color
+            }
             barElement.setAttribute('bar-value', value)
             barElement.setAttribute('from-label', key)
 
             let dataLabel = document.createElement('span')
             dataLabel.classList = 'data-label'
             dataLabel.setAttribute('from-label', key)
+            if(this.dataLabel){
+                if(this.dataLabel.color){
+                    dataLabel.style.color = this.dataLabel.color
+                }
+            }
             dataLabel.innerText = value
 
             barElement.appendChild(dataLabel)
