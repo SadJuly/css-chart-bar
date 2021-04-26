@@ -1,6 +1,5 @@
 class HorizontalChart {
     constructor({
-        element,
         height,
         width,
         title,
@@ -8,7 +7,6 @@ class HorizontalChart {
         color,
         dataLabel
     }) {
-        this.element = element
         this.color = color
         this.height = height
         this.width = width
@@ -17,7 +15,7 @@ class HorizontalChart {
         this.dataLabel = dataLabel
     }
 
-    render() {
+    render(toElement) {
 
         let element = document.querySelector(this.element)
 
@@ -77,8 +75,10 @@ class HorizontalChart {
 
         chartContainer.append(barLabels, chartBars)
         rootChart.append(chartTitle, chartContainer)
-
-        element.innerHTML = rootChart.outerHTML
-
+        if(toElement){
+            document.querySelector(toElement).innerHTML = rootChart.outerHTML
+        }else{
+            return rootChart.outerHTML
+        }
     }
 }
